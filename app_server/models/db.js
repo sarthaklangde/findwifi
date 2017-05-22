@@ -1,6 +1,11 @@
 var mongoose = require('mongoose');
 
 var dbURI = 'mongodb://localhost/gettingmean';
+console.log('Node Env: ',process.env.NODE_ENV);
+console.log('URI: ',process.env.MLAB_URI);
+if(process.env.NODE_ENV === 'production'){
+    dbURI = process.env.MLAB_URI;
+}
 mongoose.connect(dbURI);
 
 mongoose.connection.on('connected', function () {
@@ -19,6 +24,8 @@ var gracefulShutdown = function (msg, callback) {
         callback();
     });
 };
+
+
 
 process.once('SIGUSR2', function () {
     gracefulShutdown('Nodemon Restart', function () {
