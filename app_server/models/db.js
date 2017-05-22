@@ -21,17 +21,17 @@ var gracefulShutdown = function (msg, callback) {
 };
 
 process.once('SIGUSR2', function () {
-    gracefulShutdown('nodemon restart', function () {
+    gracefulShutdown('Nodemon Restart', function () {
         process.kill(process.pid, 'SIGUSR2');
     });
 });
 process.on('SIGINT', function () {
-    gracefulShutdown('app termination', function () {
+    gracefulShutdown('App Termination', function () {
         process.exit(0);
     });
 });
 process.on('SIGTERM', function() {
-    gracefulShutdown('Heroku app shutdown', function () {
+    gracefulShutdown('Heroku App Shutdown', function () {
         process.exit(0);
     });
 });
